@@ -1,5 +1,5 @@
 app:
-  name: Elasticsearch
+  name: elasticsearch
   code: AES
   notify: aannavarghese@ecloudcontrol.com
   
@@ -9,7 +9,8 @@ build:
   build_file: none
   output_files: output/*.zip
   image_template: elasticsearch-8.15
-
+  image_name: ansu-cc/elasticsearch
+  
 deploy:
   context: ansu-cc/DEV
   type: elasticsearch8  
