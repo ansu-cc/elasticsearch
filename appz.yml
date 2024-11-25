@@ -1,32 +1,44 @@
 app:
-  name: elasticsearch
-  code: AES
-  notify: aannavarghese@ecloudcontrol.com
-  
+    name: elasticsearch
+    code: ELASTICSEARCH
+    notify: aannavarghese@ecloudcontrol.com
 build:
-  version: 8.15
-  env: DEV
-  build_file: none
-  output_files: output/*.zip
-  image_template: elasticsearch-8.15
-  image_name: ansu-cc/elasticsearch
-  
+    version: 8.15
+    env: DEV
+    build_file: none
+    output_files: output/*.zip
+    image_template: elasticsearch-8.15
+ 
 deploy:
-  context: ansu-cc/DEV
-  type: elasticsearch8  
-  replicas: 1
-  port:
-  - 9200
-  - 9300
-
+    context: ansu-cc/DEV
+    replicas: 1
+    type: statefulset
+    port:
+    - 9200
+    - 9300
 volumes:
-- claim: elasticsearch-data
-  mount: /appz/data
-  name: elasticsearch-data
-  size: 20Gi
-  mode: ReadWriteOnce
-  class: microk8s-hostpath
-
+  - claim: elastic-data
+    mount: /appz/data
+    name: data
+    size: 10Gi
+    
+properties:
+    NODE_MODE: multi-node
+    REPLICA_COUNT: 1
+    #ELASTIC_PASSWORD:
+        #vault: ELASTIC_PASSWORD
+    #ES_DEFAULT_USER: elastic
+    #ES_LOG_STYLE: console
+    #ES_USER1: User1
+    #ES_PASS1:
+        #vault: ES_PASS1
+    #ES_ROLE1: superuser
+    #ES_USER2: user2
+    #ES_PASS2: 
+        #vault: ES_PASS2
+    #ES_ROLE2: superuser
+    #TINI_SUBREAPER: true
+    revision: 9
 monitor:
   notify: aannavarghese@ecloudcontrol.com      
 
