@@ -1,18 +1,17 @@
 app:
-  name: AppzElasticsearch
+  name: Elasticsearch
   code: AES
-  notify: appz@cloudbourne.co
-
+  notify: aannavarghese@ecloudcontrol.com
+  
 build:
-  version: 7.9
+  version: 8.15
   env: DEV
   build_file: none
   output_files: output/*.zip
-  image_template: elasticsearch-7.9
-  image_name: alpha/elasticsearch
+  image_template: elasticsearch-8.15
 
 deploy:
-  context: alpha/DEV
+  context: ansu-cc/DEV
   type: elasticsearch6  
   replicas: 1
   port:
@@ -28,7 +27,7 @@ volumes:
   class: microk8s-hostpath
 
 monitor:
-  notify: appzops@cloudbourne.co      
+  notify: aannavarghese@ecloudcontrol.com      
 
 properties:
   revision : 04
